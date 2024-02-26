@@ -1,0 +1,904 @@
+\documentclass[11pt]{article}
+\usepackage{amsfonts}
+\usepackage[T1]{fontenc}
+\usepackage{mathabx,graphicx}
+
+\newcommand{\test}{\circlearrowright}
+\def \loop {\ensuremath{\rotatebox[origin=c]{-90}{$\circlearrowright$}}}
+\def \nestedloop {\ensuremath{\rotatebox[origin=c]{-90}{$\circlearrowright$}}^n}
+
+\begin{document}
+
+\section*{Computation Continued}
+
+
+
+
+\section{Discrete Derivatives}
+\subsection{First Order Derivative}
+\subsection{K Order Derivative}
+
+
+
+
+
+
+\section{Convergent Complexity}
+\subsection{Definition}
+Define Convergent Complexity; the set of solutions with complexity satisfying
+\begin{center}
+$
+limit_{n \rightarrow \infty} \frac{O[n+1]}{O[n]} = c
+$
+\end{center}
+where c is a constant
+
+\subsection{Derivative Property of Convergent Solutions}
+There exists an nth derivative equal to zero
+\begin{center}
+$
+limit_{n \rightarrow \infty} \frac{O[n+1]}{O[n]} = c
+$
+\end{center}
+
+
+
+
+
+
+
+
+
+%\subsection{Show c=1 for all convergent solutions}
+%O[n] is an integer valued, non-decreasing function
+%\begin{center}
+%$
+%O[n] \in \mathbb{Z}
+%$
+%\\ \vspace{2mm}
+%$
+%O[n+1] \geq O[n]; \hspace{2mm} f_{n+1}[n] = O[n+1] - O[n] \geq 0
+%$
+%\\ \vspace{6mm}
+%$
+%limit_{n \rightarrow \infty} \frac{O[n+1]}{O[n]} = limit_{n \rightarrow \infty} \frac{O[n] + f_{n+1}[n]}{O[n]}
+%$
+%\\ \vspace{2mm}
+%$
+%=  limit_{n \rightarrow \infty}(\frac{O[n]}{O[n]} +   \frac{f_{n+1}[n]}{O[n]})
+%$
+%\\ \vspace{2mm}
+%$
+%= 1 +   limit_{n \rightarrow \infty} \frac{f_{n+1}[n]}{O[n]} = c
+%$
+%\end{center}
+
+
+
+% Theorem of Polynomial Subfunctions
+\subsection{Theorem of Polynomial Subfunctions}
+Consider solution $s^+$ with polynomial total complexity O[n] containing $z$ subfunctions $Sub_k[X_i]$ k = 1..z
+\vspace{1mm}
+\begin{center}
+$
+X_i = \{x_1,...,x_n,C\}; \hspace{2mm} \hat{X}_i = \{x_1,...,x_{n+1},C\}
+$
+\\ \vspace{2mm}
+$
+s^+ = s^+[X_i] := P :
+$
+\\ \vspace{2mm}
+$
+(P \lbrack X_i \rbrack \rightarrow y_{o} == a_{o} \hspace{3mm} \forall X_i) \hspace{2mm} \cap \hspace{2mm} (P[\hat{X}_i] \supseteq P[X_i] \hspace{3mm} \forall X_i,\hat{X}_i)
+$
+\\ \vspace{4mm}
+$
+s^+ = \{ s_1,s_2,...,s_N|b_1,b_2,...,b_M,y_o\} = \{ s_1,s_2,...,s_{O_T \lbrack n \rbrack }, b_1, b_2,...,b_{O_S \lbrack n \rbrack},y_o \}
+$
+\\ \vspace{2mm}
+$
+= \{ \mathcal{L},\mathcal{M},y_o\}
+$
+\\ \vspace{6mm}
+$
+Sub_h[X_i] := S_h = \{s_j,...|b_k,...,y_o\}:
+$
+\\ \vspace{2mm}
+$
+s_j, b_k \in s^+ \hspace{3mm} \forall s_j,b_k \in S_h
+$
+\\ \vspace{6mm}
+$
+s^+ = Sub_1[X_i] \cup Sub_2[X_i] \cup ... \cup Sub_z[X_i]
+$
+\\ \vspace{6mm}
+$
+O[n] = (\lambda_K n)^K + (\lambda_{K-1} n)^{K-1}... + \lambda_1 n + C \hspace{3mm} \forall n
+$
+\\ \vspace{2mm}
+$
+O[n] = O_{T_1}[n] + O_{T_2}[n] + ... + O_{T_z}[n] + |O_{S_1}[n] \cup O_{S_2}[n] \cup  ... \cup O_{S_z}[n]|
+$
+\\ \vspace{2mm}
+$
+= O_{T_1}[n] + O_{T_2}[n] + ... + O_{T_z}[n] + O_S[n]
+$
+\end{center}
+\vspace{6mm}
+By property of polynomial complexity
+\begin{center}
+\vspace{1mm}
+$
+limit_{n \rightarrow \infty} \frac{O[n+1]}{O[n]} = 1
+$
+\\ \vspace{2mm}
+$
+limit_{n \rightarrow \infty} \frac{O_{T_1}[n+1] + O_{T_2}[n+1] + ... + O_{T_z}[n+1] + O_S[n+1]}{O_{T_1}[n] + O_{T_2}[n] + ... + O_{T_z}[n] + O_S[n]]} = 1
+$
+\\ \vspace{2mm}
+$
+limit_{n \rightarrow \infty} \frac{O_h[n+1]}{O[n]} \leq 1 \hspace{2mm} \forall h
+$
+\end{center}
+
+
+
+\subsection{The Union of Two Converging Subfunctions is Convergent}
+Let
+\begin{center}
+$
+Sub_1[X]$ with total complexity $O_1[n]$
+\\ \vspace{2mm}
+$
+O_1[n]:
+$
+\\ \vspace{2mm}
+$
+limit_{n \rightarrow \infty}\frac{O_1[n+1]}{O_1[n]} = c_1
+$
+\\ \vspace{6mm}
+$
+Sub_2[X]$ with total complexity $O_2[n]$
+\\ \vspace{2mm}
+$
+O_2[n]:
+$
+\\ \vspace{2mm}
+$
+limit_{n \rightarrow \infty}\frac{O_2[n+1]}{O_2[n]} = c_2
+$
+\end{center}
+\vspace{1mm}
+\begin{center}
+$
+Sub_{1;2}[X] = Sub_1[X] \cup Sub_2[X]$ with complexity $O[n]
+$
+\\ \vspace{2mm}
+$
+limit_{n \rightarrow \infty}\frac{O[n+1]}{O[n]} = c
+$
+\end{center}
+\subsubsection{Proof}
+Show
+\begin{center}
+$
+limit_{n \rightarrow \infty}\frac{O[n+1]}{O[n]} = c
+$
+\\ \vspace{4mm}
+$
+Sub_{1;2}[X] = Sub_1[X] \cup Sub_2[X]$ with complexity $O[n]
+$
+\\ \vspace{2mm}
+$
+O_1[n] = O_{T_1}[n] + O_S[n]
+$
+\\ \vspace{2mm}
+$
+O_2[n] = O_{T_2}[n] + O_S[n]
+$
+\\ \vspace{2mm}
+$
+O[n] = O_{T_1}[n] + O_{T_2}[n] + O_S[n]
+$
+\\ \vspace{8mm}
+$
+\frac{O[n+1]}{O[n]} = \frac{O_{T_1}[n+1] + O_{T_2}[n+1] + O_S[n+1]}{O_{T_1}[n] + O_{T_2}[n] + O_S[n]}
+$
+\\ \vspace{2mm}
+$
+\frac{O[n+1]}{O[n]} = \frac{O_{T_1}[n+1] + O_S[n+1]}{O_{T_1}[n] + O_{T_2}[n] + O_S[n]} + \frac{O_{T_2}[n+1]}{O_{T_1}[n] + O_{T_2}[n] + O_S[n]}
+$
+\end{center}
+\vspace{8mm}
+For all non-decreasing functions f[n], g[n]
+\begin{center}
+$f_{n+1}$ goes to 0 faster
+\end{center}
+
+
+
+\subsection{The Union of Two Divergent Subfunctions is Divergent}
+Let
+\begin{center}
+$
+Sub_1[X]$ with total complexity $O_1[n]$
+\\ \vspace{2mm}
+$
+O_1[n]:
+$
+\\ \vspace{2mm}
+$
+limit_{n \rightarrow \infty}\frac{O_1[n+1]}{O_1[n]} diverges
+$
+\\ \vspace{6mm}
+$
+Sub_2[X]$ with total complexity $O_2[n]$
+\\ \vspace{2mm}
+$
+O_2[n]:
+$
+\\ \vspace{2mm}
+$
+limit_{n \rightarrow \infty}\frac{O_2[n+1]}{O_2[n]} diverges
+$
+\end{center}
+\vspace{1mm}
+\begin{center}
+$
+Sub_{1;2}[X] = Sub_1[X] \cup Sub_2[X]$ with complexity $O[n]
+$
+\\ \vspace{2mm}
+$
+limit_{n \rightarrow \infty}\frac{O[n+1]}{O[n]} diverges
+$
+\end{center}
+\subsubsection{Proof}
+Show
+\begin{center}
+$
+limit_{n \rightarrow \infty}\frac{O[n+1]}{O[n]} diverges
+$
+\end{center}
+
+
+
+
+\subsection{The Union of a convergent and divergent subfunction is Divergent}
+Let
+\begin{center}
+$
+Sub_1[X]$ with total complexity $O_1[n]$
+\\ \vspace{2mm}
+$
+O_1[n]:
+$
+\\ \vspace{2mm}
+$
+limit_{n \rightarrow \infty}\frac{O_1[n+1]}{O_1[n]} = c_1
+$
+\\ \vspace{6mm}
+$
+Sub_2[X]$ with total complexity $O_2[n]$
+\\ \vspace{2mm}
+$
+O_2[n]:
+$
+\\ \vspace{2mm}
+$
+limit_{n \rightarrow \infty}\frac{O_2[n+1]}{O_2[n]} = diverges
+$
+\end{center}
+\vspace{1mm}
+\begin{center}
+$
+Sub_{1;2}[X] = Sub_1[X] \cup Sub_2[X]$ with complexity $O[n]$
+\end{center}
+\vspace{2mm}
+Show
+\begin{center}
+$
+limit_{n \rightarrow \infty}\frac{O[n+1]}{O[n]} diverges
+$
+\end{center}
+\subsubsection{Proof}
+
+
+
+
+
+
+
+\subsection{Theorem of Divergent Subfunctions}
+
+
+% Theorem of Divergent Subfunctions direction 1
+\subsubsection{$limit_{n \rightarrow \infty} \frac{O[n+1]}{O[n]}$  diverges $\Rightarrow\\ \exists Sub_h[X_i]: limit_{n \rightarrow \infty} \frac{O_h[n+1]}{O_h[n]}$ diverges}
+If any subfunction of $s^+$ diverges, then O[n+1]/O[n] diverges, f$_{n+1}$/O[n] diverges
+Consider solution $s^+$ with polynomial total complexity O[n] containing $z$ subfunctions $Sub_k[X_i]$ k = 1..z\\
+FIX!!! concerns about OS memory complexity; $c_h$ = $c_{T_h} + c_{S_h}$; $c_{S_h}$ is the same for all subfuncrions
+\vspace{1mm}
+\begin{center}
+$
+X_i = \{x_1,...,x_n,C\}; \hspace{2mm} \hat{X}_i = \{x_1,...,x_{n+1},C\}
+$
+\\ \vspace{2mm}
+$
+s^+ = s^+[X_i] := P :
+$
+\\ \vspace{2mm}
+$
+(P \lbrack X_i \rbrack \rightarrow y_{o} == a_{o} \hspace{3mm} \forall X_i) \hspace{2mm} \cap \hspace{2mm} (P[\hat{X}_i] \supseteq P[X_i] \hspace{3mm} \forall X_i,\hat{X}_i)
+$
+\\ \vspace{4mm}
+$
+s^+ = \{ s_1,s_2,...,s_N|b_1,b_2,...,b_M,y_o\} = \{ s_1,s_2,...,s_{O_T \lbrack n \rbrack }, b_1, b_2,...,b_{O_S \lbrack n \rbrack},y_o \}
+$
+\\ \vspace{2mm}
+$
+= \{ \mathcal{L},\mathcal{M},y_o\}
+$
+\\ \vspace{6mm}
+$
+Sub_h[X_i] := S_h = \{s_j,...|b_k,...,y_o\}:
+$
+\\ \vspace{2mm}
+$
+s_j, b_k \in s^+ \hspace{3mm} \forall s_j,b_k \in S_h
+$
+\\ \vspace{6mm}
+$
+s^+ = Sub_1[X_i] \cup Sub_2[X_i] \cup ... \cup Sub_z[X_i]
+$
+\\ \vspace{6mm}
+$
+O[n] = O_{T_1}[n] + O_{T_2}[n] + ... + O_{T_z}[n] + |O_{S_1}[n] \cup O_{S_2}[n] \cup  ... \cup O_{S_z}[n]|
+$
+\\ \vspace{2mm}
+$
+= O_{T_1}[n] + O_{T_2}[n] + ... + O_{T_z}[n] + O_S[n]
+$
+\end{center}
+\vspace{8mm}
+By defintion of divergent complexity
+\begin{center}
+\vspace{1mm}
+$
+limit_{n \rightarrow \infty} \frac{O[n+1]}{O[n]}$  diverges
+\end{center}
+\vspace{6mm}
+Suppose there does not exist a diverging subfunction $Sub_h[X_i]$ for all h
+\begin{center}
+$
+\not \exists Sub_h[X_i]:
+$
+\\ \vspace{2mm}
+$
+limit_{n \rightarrow \infty} \frac{O_h[n+1]}{O_h[n]}$ diverges $\hspace{2mm} \forall h$
+\\ \vspace{2mm}
+$
+\Rightarrow limit_{n \rightarrow \infty} \frac{O_h[n+1]}{O_h[n]} = c_h \hspace{2mm} \forall h
+$
+\\ \vspace{2mm}
+$
+limit_{n \rightarrow \infty} \frac{O_{1}[n+1] + O_{2}[n+1] + ... + O_{z}[n+1]}{O_{1}[n] + O_{2}[n] + ... + O_{z}[n]}
+$
+\end{center}
+\vspace{4mm}
+Let
+\begin{center}
+$
+g_h[n] = \sum_{i \neq h} O_i[n] \geq 0^*
+$
+\\ \vspace{2mm}
+$
+\Rightarrow0 \leq limit_{n \rightarrow \infty} \frac{O_h[n+1]}{O_h[n] + g_h[n]} \leq c_h
+$
+\\ \vspace{2mm}
+$
+limit_{n \rightarrow \infty} \frac{O_{1}[n+1]}{O_1[n] + g_1[n]} + \frac{O_{2}[n+1]}{O_2[n] + g_2[n]} +  ... + \frac{O_{z}[n+1]}{O_{1}[n] + g_z[n]}
+$
+\\ \vspace{2mm}
+$
+0 \leq limit_{n \rightarrow \infty} \frac{O_{1}[n+1]}{O_1[n] + g_1[n]} + \frac{O_{2}[n+1]}{O_2[n] + g_2[n]} +  ... + \frac{O_{z}[n+1]}{O_{1}[n] + g_z[n]} \leq \sum_{i=1}^{z} c_i
+$
+\\ \vspace{2mm}
+$
+\Rightarrow limit_{n \rightarrow \infty} \frac{O_{1}[n+1]}{O_1[n] + g_1[n]} + \frac{O_{2}[n+1]}{O_2[n] + g_2[n]} +  ... + \frac{O_{z}[n+1]}{O_{1}[n] + g_z[n]} = \tilde{C}
+$
+\\ \vspace{2mm}
+$
+0 \leq \tilde{C} \leq \sum_{i=1}^{z} c_i
+$
+\end{center}
+\vspace{2mm}
+*O$_i[n]\geq$ 0 is a non-decreasing function
+\vspace{10mm}
+\\Assuming
+\begin{center}
+$
+\not \exists Sub_h[X_i]:
+$
+\\ \vspace{2mm}
+$
+limit_{n \rightarrow \infty} \frac{O_h[n+1]}{O_h[n]}$ diverges $\hspace{2mm} \forall h$
+\\ \vspace{2mm}
+$
+\Rightarrow  limit_{n \rightarrow \infty} \frac{O_[n+1]}{O_1[n]} = \tilde{C}
+$
+\end{center}
+Contradicting the definition of divergent solution
+\vspace{6mm}
+\begin{center}
+$
+\therefore \exists Sub_h[X_i]:
+$
+\\ \vspace{2mm}
+$
+limit_{n \rightarrow \infty} \frac{O_h[n+1]}{O_h[n]}$ diverges $\hspace{2mm}$
+\end{center}
+
+
+
+
+% Theorem of Divergent Subfunctions direction 2
+\newpage
+\subsubsection{$\exists Sub_h[X_i]: limit_{n \rightarrow \infty} \frac{O_h[n+1]}{O_h[n]}$ diverges $\Rightarrow\\ limit_{n \rightarrow \infty} \frac{O[n+1]}{O[n]}$  diverges}
+FIX!!! SPACE OS portion
+\vspace{1mm}
+\begin{center}
+$
+X_i = \{x_1,...,x_n,C\}; \hspace{2mm} \hat{X}_i = \{x_1,...,x_{n+1},C\}
+$
+\\ \vspace{2mm}
+$
+s^+ = s^+[X_i] := P :
+$
+\\ \vspace{2mm}
+$
+(P \lbrack X_i \rbrack \rightarrow y_{o} == a_{o} \hspace{3mm} \forall X_i) \hspace{2mm} \cap \hspace{2mm} (P[\hat{X}_i] \supseteq P[X_i] \hspace{3mm} \forall X_i,\hat{X}_i)
+$
+\\ \vspace{4mm}
+$
+s^+ = \{ s_1,s_2,...,s_N|b_1,b_2,...,b_M,y_o\} = \{ s_1,s_2,...,s_{O_T \lbrack n \rbrack }, b_1, b_2,...,b_{O_S \lbrack n \rbrack},y_o \}
+$
+\\ \vspace{2mm}
+$
+= \{ \mathcal{L},\mathcal{M},y_o\}
+$
+\\ \vspace{6mm}
+$
+Sub_h[X_i] := S_h = \{s_j,...|b_k,...,y_o\}:
+$
+\\ \vspace{2mm}
+$
+s_j, b_k \in s^+ \hspace{3mm} \forall s_j,b_k \in S_h
+$
+\\ \vspace{6mm}
+$
+s^+ = Sub_1[X_i] \cup Sub_2[X_i] \cup ... \cup Sub_z[X_i]
+$
+\\ \vspace{2mm}
+$
+O[n] = O_{T_1}[n] + O_{T_2}[n] + ... + O_{T_z}[n] + |O_{S_1}[n] \cup O_{S_2}[n] \cup  ... \cup O_{S_z}[n]|
+$
+\\ \vspace{2mm}
+$
+= O_{T_1}[n] + O_{T_2}[n] + ... + O_{T_z}[n] + O_S[n]
+$
+\end{center}
+\vspace{8mm}
+Suppose 
+\begin{center}
+$
+\exists Sub_h[X_i]: limit_{n \rightarrow \infty} \frac{O_h[n+1]}{O_h[n]}$ diverges
+\\ \vspace{8mm}
+$
+\frac{O_h[n+1]}{O_h[n]} \geq 1^* \hspace{4mm} \forall h
+$
+\\ \vspace{2mm}
+$^* O_h[n]$ is a positive non-decreasing function
+\\ \vspace{6mm}
+$
+limit_{n \rightarrow \infty} \frac{O[n+1]}{O[n]}
+$
+\\ \vspace{2mm}
+$
+= limit_{n \rightarrow \infty} \frac{O_{1}[n+1] + O_{2}[n+1] + ... + O_{z}[n+1]}{O_{1}[n] + O_{2}[n] + ... + O_{z}[n]}
+$
+\\ \vspace{2mm}
+$
+limit_{n \rightarrow \infty} \frac{O_{1}[n+1]}{O[n]} + ... + \frac{O_{h}[n+1]}{O[n]} +  ... + \frac{O_{z}[n+1]}{O[n]}
+$
+\\ \vspace{8mm}
+$
+limit_{n \rightarrow \infty} \frac{O_{h}[n+1]}{O[n]} = limit_{n \rightarrow \infty} \frac{O_{h}[n+1]}{O_h[n] + g_h[n]} 
+$
+\\ \vspace{2mm}
+$
+= limit_{n \rightarrow \infty} (\frac{O_{h}[n+1]}{O_h[n]]} - \frac{g_h[n]O_h[n+1]}{O_h[n](O_h[n] + g_h[n])})
+$
+\\ \vspace{2mm}
+$
+= limit_{n \rightarrow \infty} (\frac{O_{h}[n+1]}{O_h[n]]} - \frac{(O[n] - O_h[n])(O_h[n] + f_{n+1}[n])}{O_h[n]O[n]})
+$
+\\ \vspace{2mm}
+$
+= limit_{n \rightarrow \infty} (\frac{O_{h}[n+1]}{O_h[n]]} + \frac{-O_h[n]O[n]-f_{n+1}[n]O[n]+O_h^2[n]+f_{n+1}O_h[n]}{O_h[n]O[n]})
+$
+\\ \vspace{2mm}
+$
+= limit_{n \rightarrow \infty} (\frac{O_{h}[n+1]}{O_h[n]]} - 1 - \frac{f^h_{n+1}[n]}{O_h[n]} + \frac{O_h[n]}{O[n]} + \frac{f^h_{n+1}[n]}{O[n]})
+$
+\end{center}
+
+
+
+
+
+
+
+
+\subsection{Sum of convergent, divergent, and constant subfunctions}
+Let
+\begin{center}
+$
+s^+ = \cup_{i=1}^z Sub_i[X]
+$
+\end{center}
+
+
+% Optimal Complexity; Optimal Solutions; Optimal Time Solution; Optimal Space Solution
+\section{Optimal Complexity}
+Conjecture is that you start as the optimal solution and then as you add new inputs the complexity remains optimal\\
+There's an easier proof that the optimal inductive function converges to optimal as n approaches infty
+
+\subsection{Definition}
+Define Optimal Complexity; the minimum total complexity required to solve a decision problem
+\begin{center}
+$O_{opt}[n] := O[n]:$
+\\ \vspace{2mm}
+$\not \exists O_i\lbrack n \rbrack < O[n] \hspace{3mm} \forall s_i \in S^+$
+\end{center}
+
+\subsection{Proof of Existence}
+Prove the existence of at least one $O_{min}[n]$ by induction/contradiction\\
+Induction, let n = 1\\
+There must exists an $O_{min}$\\
+subfunction property all the way up
+
+
+
+
+
+
+
+
+\section{Optimal solution}
+Define an optimal solution $s_{opt}^+$
+
+\subsection{Definition}
+\begin{center}
+$
+X_i = \{x_1,...,x_n\}
+$
+\\ \vspace{2mm}
+$
+D_j := f \lbrack X_i \rbrack \rightarrow a_{o} \in \{\mathbb{T}, \mathbb{F}\} \hspace{3mm} \forall X_i
+$
+\\ \vspace{2mm}
+$
+s^+ := P \lbrack X_i \rbrack \rightarrow y_{o} : y_o = a_{o} \hspace{3mm} \forall X_i
+$
+\\ \vspace{2mm}
+$
+s_{opt}^+ := s^+ :
+$
+\\ \vspace{2mm}
+$
+\not \exists \hat{O} \lbrack n \rbrack < O_{opt}[n] \hspace{3mm} \forall n, \hspace{1mm}  s^+ \in S_j^+
+$
+\end{center}
+
+
+
+
+
+\subsection{Optimal Time Complexity Solution}
+\begin{center}
+$
+X_i = \{x_1,...,x_n\}
+$
+\\ \vspace{2mm}
+$
+D_j := f \lbrack X_i \rbrack \rightarrow a_{o} \in \{\mathbb{T}, \mathbb{F}\} \hspace{3mm} \forall X_i
+$
+\\ \vspace{2mm}
+$
+s^+ := P \lbrack X_i \rbrack \rightarrow y_{o} : y_o = a_{o} \hspace{3mm} \forall X_i = 
+$
+\\ \vspace{2mm}
+$
+\{ s_1,s_2,...,s_{O_T \lbrack n \rbrack }, b_1, b_2,...,b_{O_S \lbrack n \rbrack},X_i,y_o \} = \{ \mathcal{L},\mathcal{M},X_i,y_o\}
+$
+\\ \vspace{3mm}
+$
+O_T[n] := |\mathcal{L}| = N
+$
+\\ \vspace{2mm}
+$
+s_{T}^+ := s^+ :
+$
+\\ \vspace{2mm}
+$
+\not \exists \hat{O_T} \lbrack n \rbrack < O_{T}[n] \hspace{3mm} \forall n, \hspace{1mm}  s^+ \in S_j^+
+$
+\end{center}
+
+
+
+
+\subsection{Optimal Space Complexity Solution}
+
+\begin{center}
+$
+X_i = \{x_1,...,x_n\}
+$
+\\ \vspace{2mm}
+$
+D_j := f \lbrack X_i \rbrack \rightarrow a_{o} \in \{\mathbb{T}, \mathbb{F}\} \hspace{3mm} \forall X_i
+$
+\\ \vspace{2mm}
+$
+s^+ := P \lbrack X_i \rbrack \rightarrow y_{o} : y_o = a_{o} \hspace{3mm} \forall X_i = 
+$
+\\ \vspace{2mm}
+$
+\{ s_1,s_2,...,s_{O_T \lbrack n \rbrack }, b_1, b_2,...,b_{O_S \lbrack n \rbrack},X_i,y_o \} = \{ \mathcal{L},\mathcal{M},X_i,y_o\}
+$
+\\ \vspace{3mm}
+$
+O_S[n] := |\mathcal{M}| = M
+$
+\\ \vspace{2mm}
+$
+s_{S}^+ := s^+ :
+$
+\\ \vspace{2mm}
+$
+\not \exists \hat{O_S} \lbrack n \rbrack < O_{S}[n] \hspace{3mm} \forall n, \hspace{1mm}  s^+ \in S_j^+
+$
+\end{center}
+
+
+
+
+
+
+
+\subsection{Conjecture of Optimal Solutions}
+$O_{T_{min}}$ subject to $O_{S_{opt}} = 1$
+\begin{center}
+$
+\exists s^+_{opt} :
+$
+\\ \vspace{2mm}
+$
+O_{opt}[n] = 1 + O_T[n] = O_{S_{opt}} + O_T[n] \hspace{3mm} \forall s^+ \in S^+
+$
+\end{center}
+\subsubsection{Proof}
+
+
+
+
+\subsection{Theorem of Optimal Solutions}
+Alternate way of expressing $O_{opt}[n]$ possibly with efficiency function and equivalence functions?\\
+$f_{S \rightarrow T}[n,O_S[n]]$ as a function of space complexity order K?\\
+Efficiency function ($f_{S \rightarrow T}[n,O_S[n]]$ as a function of space complexity order K) is strictly decreasing for Polynomial Functions\\
+Or there's an inflection point\\
+Efficiency function might have a general pattern for all problems in D
+
+
+
+
+
+
+
+
+
+
+
+
+% Equivalence Functions of OT and OS
+\newpage
+\section{Duality of $O_T[n]$, $O_S[n]$?}
+\subsubsection{$O_T$ to $O_S$}
+Define equivalence function $f_{T \rightarrow S}$; a function converting logical operations into memory elements
+\begin{center}
+$
+f_{T \rightarrow S} := f :
+$
+\\ \vspace{2mm}
+$
+O_S[n] = f[n,O_T[n]] \hspace{3mm} \forall n, s^+ \in S^+
+$
+\end{center}
+
+\subsubsection{$O_S$ to $O_T$}
+Define equivalence function $f_{S \rightarrow T}$; a function converting memeory elements into logical operations
+\begin{center}
+$
+f_{S \rightarrow T} := f :
+$
+\\ \vspace{2mm}
+$
+O_T[n] = f[n,O_S[n]] \hspace{3mm} \forall n, s^+ \in S^+
+$
+\end{center}
+
+
+\subsubsection{Invertibility?}
+\subsubsection{Polynomial Bounded?}
+
+
+
+
+\subsection{Efficiency Function?}
+Function relating the decrease in O[n] as $O_S[n]$ increases in order\\
+$f_{S \rightarrow T}[n,O_S[n]]$ as a function of space complexity order K?
+
+
+\section{Theorem of Computational Duality?}
+For all Problems in P there exists a duality function\\
+Formally define dynamic programming, Optimal polynomial complexity minimizes the difference between time and space complexity order
+\begin{center}
+\vspace{2mm}
+$
+D \in \mathbb{P}
+$
+\\ \vspace{2mm}
+$
+O[n] := O_T[n] + O_S[n]
+$
+\\ \vspace{2mm}
+$
+limit_{n \rightarrow \infty} \frac{O[n+1]}{O[n]} = 1 \hspace{3mm} \forall s^+ \in S_{\mathbb{P}}^+
+$
+\\ \vspace{7mm}
+$
+O_T[n] = f_{S \rightarrow T}[n,O_S[n]]
+$
+\\ \vspace{2mm}
+$
+O_S[n] = f_{T \rightarrow S}[n,O_T[n]]
+$
+\\ \vspace{7mm}
+$
+limit_{n \rightarrow \infty} \frac{O_T[n+1] + O_S[n+1]}{O_T[n] + O_S[n]} = 1 \hspace{3mm} \forall s^+ \in S_{\mathbb{P}}^+
+$
+\\ \vspace{7mm}
+$
+limit_{n \rightarrow \infty} \frac{ f_{S \rightarrow T}[n+1,O_S[n+1]] + O_S[n+1]}{ f_{S \rightarrow T}[n,O_S[n]] + O_S[n]} = 1 \hspace{3mm} \forall s^+ \in S_{\mathbb{P}}^+
+$
+\\ \vspace{3mm}
+$
+limit_{n \rightarrow \infty} \frac{O_T[n+1] + f_{T \rightarrow S}[n+1,O_T[n+1]]}{O_T[n] + f_{T \rightarrow S}[n,O_T[n]]} = 1 \hspace{3mm} \forall s^+ \in S_{\mathbb{P}}^+
+$
+\end{center}
+
+
+
+
+
+
+
+
+
+
+\newpage
+\section{Imaginary Problems}
+Problems with a contradictory subproblem\\
+O[n] = $n^n$\\
+Show no general finite solution exists only\\
+General approach is obtained by negative recursive set span
+
+
+\section{Efficient Approximations}
+
+
+% Universal Bound of Computation
+\newpage
+\section{Universal Bound of Computation?}
+maybe
+\begin{center}
+$
+O[n] < n^n \hspace{3mm} \forall s^+
+$
+\end{center}
+
+\subsection{Convergent Solutions}
+\subsection{Show Convergent Union Divergent Solutions represent the universe of solutions}
+O[n+1]/O[n] converges or diverges represents the universe of outcomes, does converging to 1 imply all converging solutions?
+
+\subsection{Show Polynomial Solutions are bounded by $n^n$}
+\subsection{Show Divergent Solutions are bounded by $n^n$?}
+
+
+
+
+
+
+
+
+
+% Theorem of Prime Numbers "Riemann Hypothesis"
+\newpage
+\section{Theorem of Prime Numbers "Riemann Hypothesis"}
+Riemann Zeta Function
+\begin{center}
+$
+\zeta (s) \equiv \sum_{n=1}^{\infty} \frac{1}{n^s} \hspace{3mm} \lbrack 2 \rbrack
+$
+\end{center}
+"The prime number theorem determines the average distribution of the primes. The Riemann hypothesis tells us about the deviation from the average. Formulated in Riemann's 1859 paper, it asserts that all the 'non-obvious' zeros of the zeta function are complex numbers with real part 1/2." \lbrack 3\rbrack\\
+\\
+Prove the problem is divergent\\
+There fore it can only be proven to a certain degree\\
+The limit as n approaches infinity implies a real part of one half\\
+Connection with the real and imaginary part of O $\lbrack n \rbrack$
+
+\subsection{Determine a duality function for the Riemann Hypothesis}
+\subsection{Determine an expression for O[n+1] as a function of O[n]}
+
+\subsection{Prove $O_{opt}$ is performing $O_{opt}$ recursively for the ints less than square root of n}
+Testing the primes less than sqrt(n)? double check \\
+1. Optimal solution for n=1,2,3, everything else is a recursive optimal proof by induction\\
+Time Complexity seems to be on the order of n log n... implies divergence or lack of bound? Add in the complexity of division.. probably approaches $n^n$
+
+%\subsection{Show that $O_{opt}$ diverges with $n^n$, isn't bounded by $n^n$}
+%Proves O is divergent
+
+\subsection{Since divergent, no $s^{+}$ exists.. only rules}
+Express as a limit
+
+\subsection{Show that the limit as n $\rightarrow \infty$ implies the real part is 1/2}
+1/2 ± 14.134725 i
+1/2 ± 21.022040 i
+1/2 ± 25.010858 i
+1/2 ± 30.424876 i
+1/2 ± 32.935062 i
+1/2 ± 37.586178 i
+
+Z = $\zeta(1/2 + it)$
+
+\subsection{Notation, real imaginary parts of the problem}
+Even numbers and numbers ending in 5 are automatically convergent\\
+Testing numbers ending in 1,3,7,9 results in divergent expression\\
+we can continue to add rules to a certain degree
+
+
+
+
+
+
+
+
+\section*{Computation Continued}
+Permitting contradiction?
+
+\section{Beyond Simple Computation}
+Recall the definition of complexity and simple computational complexity
+
+\section{Relationship to Simple Computation}
+Simply an abstraction above Logical operations and Memory; typically empowered by hardware
+
+\section{Fuzzy Logic}
+Allowing partial truth and false values
+
+\section{Simultaneous Computation}
+Seemingly a contradiction, perhaps a new dimension of complexity is how close to simultaneous
+
+\section{Paraconsistent Computation}
+Might not be possible
+
+\end{document}
